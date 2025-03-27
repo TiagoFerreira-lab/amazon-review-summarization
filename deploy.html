@@ -1,0 +1,129 @@
+import os
+
+# Create a list of categories and their details
+categories = {
+    "Accessories": {
+        "title": "Accessories",
+        "content": """
+            <h2>The Ultimate Guide to Accessories Products</h2>
+            <p>Looking for the best Accessories products? Our team has analyzed thousands of customer reviews...</p>
+            <h3>Top 3 Accessories Products You Should Consider:</h3>
+            <ul>
+                <li><strong>Expanding Accordion File Folder</strong> - ⭐⭐⭐⭐⭐</li>
+                <li><strong>AmazonBasics USB 3.0 Cable</strong> - ⭐⭐⭐⭐⭐</li>
+                <li><strong>Amazon 9W PowerFast Charger</strong> - ⭐⭐⭐⭐½</li>
+            </ul>
+        """,
+        "image": "https://via.placeholder.com/150?text=Accessories"  # Placeholder image link
+    },
+    "E-readers": {
+        "title": "E-readers",
+        "content": """
+            <h2>The Ultimate Guide to E-readers Products</h2>
+            <p>Looking for the best E-readers products? Our team has analyzed thousands of customer reviews...</p>
+            <h3>Top 3 E-readers Products You Should Consider:</h3>
+            <ul>
+                <li><strong>Kindle Voyage E-reader</strong> - ⭐⭐⭐⭐½</li>
+                <li><strong>Kindle PowerFast Charging Kit</strong> - ⭐⭐⭐⭐½</li>
+                <li><strong>Kindle Voyage E-reader (Wi-Fi)</strong> - ⭐⭐⭐⭐½</li>
+            </ul>
+        """,
+        "image": "https://via.placeholder.com/150?text=E-readers"  # Placeholder image link
+    },
+    "Smart Home Speakers": {
+        "title": "Smart Home Speakers",
+        "content": """
+            <h2>The Ultimate Guide to Smart Home & Speakers Products</h2>
+            <p>Looking for the best Smart Home & Speakers products? Our team has analyzed thousands of customer reviews...</p>
+            <h3>Top 3 Smart Home & Speakers Products You Should Consider:</h3>
+            <ul>
+                <li><strong>Certified Refurbished Amazon Echo</strong> - ⭐⭐⭐⭐⭐</li>
+                <li><strong>AmazonBasics 16-Gauge Speaker Wire</strong> - ⭐⭐⭐⭐⭐</li>
+                <li><strong>Fire HD 8 Tablet with Alexa</strong> - ⭐⭐⭐⭐½</li>
+            </ul>
+        """,
+        "image": "https://via.placeholder.com/150?text=Smart+Home+Speakers"  # Placeholder image link
+    },
+    "Tablets & Entertainment": {
+        "title": "Tablets & Entertainment",
+        "content": """
+            <h2>The Ultimate Guide to Tablets & Entertainment Products</h2>
+            <p>Looking for the best Tablets & Entertainment products? Our team has analyzed thousands of customer reviews...</p>
+            <h3>Top 3 Tablets & Entertainment Products You Should Consider:</h3>
+            <ul>
+                <li><strong>Fire TV Stick Streaming Media Player</strong> - ⭐⭐⭐⭐⭐</li>
+                <li><strong>All-New Fire HD 8 Tablet (Blue)</strong> - ⭐⭐⭐⭐½</li>
+                <li><strong>All-New Fire HD 8 Tablet (Magenta)</strong> - ⭐⭐⭐⭐½</li>
+            </ul>
+        """,
+        "image": "https://via.placeholder.com/150?text=Tablets+Entertainment"  # Placeholder image link
+    }
+}
+
+# HTML structure for the page
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Guides</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background-color: #333; color: white; text-align: center; padding: 10px 0; }
+        header h1 { margin: 0; }
+        .categories { display: flex; justify-content: space-around; margin: 20px 0; }
+        .category-btn { padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; font-size: 16px; text-align: center; }
+        .category-btn img { width: 150px; height: 150px; display: block; margin: 0 auto 10px; }
+        .category-btn:hover { background-color: #0056b3; }
+        .content { padding: 20px; background-color: white; margin: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .category-info { display: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Product Guides</h1>
+    </header>
+    <div class="categories">
+"""
+
+# Add category buttons
+for category, details in categories.items():
+    html_content += f"""
+    <div class="category-btn" onclick="toggleContent('{category}')">
+        <img src="{details['image']}" alt="{category}">
+        <p>{category}</p>
+    </div>
+    """
+
+html_content += "</div>"
+
+# Add category content sections (hidden by default)
+for category, details in categories.items():
+    html_content += f"""
+    <div id="{category}" class="category-info content">
+        {details['content']}
+    </div>
+    """
+
+# Add JavaScript to toggle visibility of each category content
+html_content += """
+    <script>
+        function toggleContent(category) {
+            var content = document.getElementById(category);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
+"""
+
+# Save HTML content to file
+with open("index.html", "w") as file:
+    file.write(html_content)
+
+print("HTML file generated successfully.")
